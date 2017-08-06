@@ -4,29 +4,33 @@ function setHeader() {
 	header("Access-Control-Allow-Origin: *");
 }
 
-
-function FetchTable(PDO $pdo, $table, $notNull = true) {
+function FetchData(PDO $pdo, $table, $column = '*', $notNull = true) {
 	try {
-		$stmt = $pdo->prepare("select * from {$table} " . ($notNull ? "where description not null" : ""));
+		$stmt = $pdo->prepare("select {$column} from {$table} " . ($notNull ? "where description not null" : ""));
 		$stmt->execute();
 		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		setHeader();
 		return json_encode($res);
 	} catch(PDOException $e) {
         return json_encode([['error' => $e->getMessage()]]);
-    }
-
+  }
 }
 
-function FetchCode(PDO $pdo, $table, $description, $notNull = true) {
-	try {
-		$stmt = $pdo->prepare("SELECT code FROM {$table} WHERE descr = :descr");
-		$stmt->bindParam(':descr', $description, PDO::PARAM_STR);
-		$stmt->execute();
-		$res = $stmt->fetch(PDO::FETCH_ASSOC);
-		setHeader();
-		return json_encode($res);
-	} catch(PDOException $e) {
-        return json_encode([['error' => $e->getMessage()]]);
-    }
+function FetchallTable(PDO $pdo, $table, $notNull = true) {
+	return FetchData($pdo, $table, '*', $notNull);
 }
+
+function FetchColumnTable(PDO $pdo, $table, $column, $notNull = true) {
+	return FetchData($pdo, $table, $column, $notNull);
+}
+
+// function FetchCode(PDO $pdo, $table, $description, $notNull = true) {
+// 	try {
+// 		$stmt = $pdo->prepare("SELECT code FROM {$table} WHERE descr = :descr");
+// 		$stmt->bindParam(':descr', $description, PDO::PARAM_STR);
+// 		$stmt->execute();
+// 		$res = $stmt->fetch(PDO::FETCH_ASSOC);
+// 		return json_encode($res);
+// 	} catch(PDOException $e) {
+//         return json_encode([['error' => $e->getMessage()]]);
+//     }
+// }

@@ -17,12 +17,15 @@ $app->group('/api', function () {
 
 		// List all mainpart
 		$this->get('/mainpart', function ($request, $response) {
-			return FetchTable($this->db, 'mainparts');
+			setHeader();
+			return FetchallTable($this->db, 'mainparts');
+			// return FetchData($this->db, 'mainparts',true, 'description');
 		});
 
 		// List all rating
 		$this->get('/rating', function ($request, $response) {
-			return FetchTable($this->db, 'ratings');
+			setHeader();
+			return FetchallTable($this->db, 'ratings');
 		});
 
 

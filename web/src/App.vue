@@ -14,8 +14,13 @@
 
   <section class="section">
     <div class="container">
-      <component :is="currentView"></component>
+      <!-- <component :is="currentView"></component> -->
+      <div :is="currentView">
+        <!-- <select-box name="mainpart"></select-box>
+        <select-box name="rating"></select-box> -->
+      </div>
     </div>
+
   </section>
 
   <layout-footer></layout-footer>
@@ -25,28 +30,14 @@
 
 <script>
 
-import layout_head from './assets/components/layout-head.vue';
-import layout_body from './assets/components/layout-body.vue';
-import layout_footer from './assets/components/layout-footer.vue';
-import about from './assets/components/about.vue';
+
 
 export default {
-  name: 'app',
-  components: {
-    'layout-head': layout_head,
-    'layout-body': layout_body,
-    'layout-footer': layout_footer,
-    about,
-  },
   data() {
     return {
       currentView: 'layout-body',
     }
   },
-  methods : {
-
-
-  }
 
 }
 
