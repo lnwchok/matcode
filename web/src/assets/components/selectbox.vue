@@ -1,7 +1,7 @@
 <template>
   <div>
     <select v-model="selected">
-      <option v-for="part in parts" v-bind:value="part.code">
+      <option v-for="part in parts" :value="part.code">
           {{ part.description }}
       </option>
 
@@ -12,7 +12,7 @@
 
 <script>
 
-import axios from 'axios'
+import axios from 'axios';
 export default {
   props: {
     name : {required : true},

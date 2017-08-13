@@ -14,16 +14,12 @@
 
   <section class="section">
     <div class="container">
-      <!-- <component :is="currentView"></component> -->
-      <div :is="currentView">
-        <!-- <select-box name="mainpart"></select-box>
-        <select-box name="rating"></select-box> -->
-      </div>
+      <component :is="currentView"></component>
     </div>
 
   </section>
 
-  <layout-footer></layout-footer>
+  <layout-footer />
 </div>
 
 </template>
@@ -38,6 +34,7 @@ export default {
       currentView: 'layout-body',
     }
   },
+
 
 }
 

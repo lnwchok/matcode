@@ -28,6 +28,11 @@ $app->group('/api', function () {
 			return FetchallTable($this->db, 'ratings');
 		});
 
+		// List all material
+		$this->get('/material', function ($request, $response) {
+			setHeader();
+			return FetchallTable($this->db, 'materials');
+		});
 
 
 	});
