@@ -1,10 +1,10 @@
 <template>
   <div>
-    <select v-model="selected">
+    <select @change="selectOption">
+      <option disabled value="" selected>Please select</option>
       <option v-for="part in parts" :value="part.code">
           {{ part.description }}
       </option>
-
     </select>
     <span>Selected: {{ selected }}</span>
   </div>
@@ -16,6 +16,13 @@ import axios from 'axios';
 export default {
   props: {
     name : {required : true},
+  },
+
+  methods: {
+    selectOption(event) {
+      this.selected = event.target.value;
+      this.$emit('boxChanged', this.selected);
+    }
   },
 
   data() {
